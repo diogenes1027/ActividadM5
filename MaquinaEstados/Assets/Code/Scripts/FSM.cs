@@ -92,9 +92,27 @@ public class FSM : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
     }
 
+    // Puntos 2 y 6 de la actividad de tanques
     void UpdateChase()
     {
+        //Checar la distancia con el tanque jugador
+        if(Vector3.Distance(transform.position, playerTransform.position) <= chaseRadius)
+        {
+            currentState = FSMStates.Chase;
+        }
+        //Si la distancia del tanque del jugador es lejana, regresa a modo Patrulla
+        else if(Vector3.Distance(transform.position, playerTransform.position) >= chaseRadius)
+        {
+            print("Switch to Patrol state");
+            currentState = FSMStates.Patrol;
+        }
 
+        //Rotate to the target point
+        Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+        
+        //Ve adelante
+        transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
     }
 
     void UpdateAim()
