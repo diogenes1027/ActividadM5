@@ -7,6 +7,7 @@ public class TankController : MonoBehaviour
     public GameObject bullet;
     public GameObject turret;
     public GameObject bulletSpawnPoint;
+    public GameObject winnerText, loserText;
 
     public float curSpeed, targetSpeed;
     public float rotSpeed = 150.0f;
@@ -14,6 +15,7 @@ public class TankController : MonoBehaviour
     public float maxForwardSpeed = 30.0f;
     public float maxBackwardSpeed = -30.0f;
     public float shootRate = 0.5f;
+    private int health = 150;
 
     private float elapsedTime;
 
@@ -31,6 +33,17 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(health <= 0)
+        {
+            gameObject.SetActive(false);
+            loserText.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            winnerText.SetActive(true);
+            Time.timeScale = 0; 
+        }
         UpdateControl();
         UpdateWeapon();
     }
@@ -84,6 +97,14 @@ public class TankController : MonoBehaviour
 
                 Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Bullet")
+        {
+            health -= col.gameObject.GetComponent<BulletController>().damage;
         }
     }
 }
