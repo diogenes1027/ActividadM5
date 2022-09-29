@@ -28,6 +28,11 @@ public class FSM : MonoBehaviour
     public float patrolRadius = 10f;
     public float chaseRadius = 25f;
     public float AttackRadius = 20f;
+    public float AlertRange;
+    public LayerMask PlayerCape;
+    public Transform Player;
+    public float velocity;
+    bool StayAlert;
     private int index = -1;
 
     // Start is called before the first frame update
@@ -95,24 +100,17 @@ public class FSM : MonoBehaviour
     // Puntos 2 y 6 de la actividad de tanques
     void UpdateChase()
     {
-        //Checar la distancia con el tanque jugador
-        if(Vector3.Distance(transform.position, playerTransform.position) <= chaseRadius)
-        {
-            currentState = FSMStates.Chase;
-        }
-        //Si la distancia del tanque del jugador es lejana, regresa a modo Patrulla
-        else if(Vector3.Distance(transform.position, playerTransform.position) >= chaseRadius)
-        {
-            print("Switch to Patrol state");
-            currentState = FSMStates.Patrol;
-        }
+        StayAlert = Physics.CheckSphere(transform.position, AlertRange, PlayerCape);
 
-        //Rotate to the target point
-        Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
-        
-        //Ve adelante
-        transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
+        if(StayAlert == true) {
+            Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
+            transform.LookAt(posPlayer);
+            transform.position = Vector3.MoveTowards(transform.position, posPlayer, velocity * Time.deltaTime);
+        }
+    }
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position,AlertRange);
     }
 
     void UpdateAim()
