@@ -518,7 +518,7 @@ MonoBehaviour:
   maxBackwardSpeed: -30
   shootRate: 0.5
   patrolRadius: 1
-  chaseRadius: 10
+  chaseRadius: 5
   AttackRadius: 7
   AlertRange: 2.5
   PlayerCape:
