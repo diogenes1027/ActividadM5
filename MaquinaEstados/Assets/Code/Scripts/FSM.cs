@@ -28,12 +28,19 @@ public class FSM : MonoBehaviour
     public float patrolRadius = 10f;
     public float chaseRadius = 25f;
     public float AttackRadius = 20f;
+    private int index = -1;
+    public float aimTime = 1.0f;
+    public float elapsedAimTime;
+    public bool tookDamage = false;
+    public float elapsedEvadeTime;
+    public float evadeTime = 3.0f;
+    public Vector3 escapePoint;
+    //Nuevos
     public float AlertRange;
     public LayerMask PlayerCape;
     public Transform Player;
     public float velocity;
     bool StayAlert;
-    private int index = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +57,9 @@ public class FSM : MonoBehaviour
 
     void Update()
     {
+        if(health <= 0) {
+            Destroy(gameObject);
+        }
         switch(currentState)
         {
             case FSMStates.Patrol:
@@ -100,6 +110,38 @@ public class FSM : MonoBehaviour
     // Puntos 2 y 6 de la actividad de tanques
     void UpdateChase()
     {
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        if(distance <= AttackRadius) {
+            print("Switch to Aim state");
+            currentState = FSMStates.Aim;
+        }
+        else if (distance >= chaseRadius) {
+            print("Switch to Patrol state");
+            currentState = FSMStates.Patrol;
+        }
+        else if(distance <= chaseRadius) {
+            Quaternion targetRotation = Quaternion.LookRotation(playerTransform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
+        }
+        if(tookDamage) {
+            tookDamage = false;
+            int xSign = (int)Mathf.Sign(playerTransform.position.x - transform.position.x);
+            int zSign = (int)Mathf.Sign(playerTransform.position.z - transform.position.z);
+            print("xSign is: " + xSign);
+            print("zSign is: " + zSign);
+            if(xSign == -1 && zSign == 1)
+                escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
+            else if(xSign == 1 && zSign == 1)
+                escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
+            else if(xSign == -1 && zSign == -1)
+                escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z - Random.Range(5,10));
+            else if(xSign == 1 && zSign == -1)
+                escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z - Random.Range(5,10));
+            print("Switch to Evade state");
+            currentState = FSMStates.Evade;
+        }
+        /*
         StayAlert = Physics.CheckSphere(transform.position, AlertRange, PlayerCape);
 
         if(StayAlert == true) {
@@ -107,6 +149,7 @@ public class FSM : MonoBehaviour
             transform.LookAt(posPlayer);
             transform.position = Vector3.MoveTowards(transform.position, posPlayer, velocity * Time.deltaTime);
         }
+        */
     }
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -126,6 +169,15 @@ public class FSM : MonoBehaviour
     void UpdateEvade()
     {
 
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Bullet")
+        {
+            health -= col.gameObject.GetComponent<BulletController>().damage;
+            tookDamage = true;
+        }
     }
 
     private void FixedUpdate() 
