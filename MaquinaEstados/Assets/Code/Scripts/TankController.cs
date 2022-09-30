@@ -17,6 +17,8 @@ public class TankController : MonoBehaviour
 
     private float elapsedTime;
 
+    
+
     void OnEndGame() {
         // Don't allow any more control changes when the game ends
         this.enabled = false;
@@ -33,6 +35,9 @@ public class TankController : MonoBehaviour
     {
         UpdateControl();
         UpdateWeapon();
+
+      
+
     }
 
     void UpdateControl() 

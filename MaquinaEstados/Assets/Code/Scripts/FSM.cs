@@ -30,6 +30,9 @@ public class FSM : MonoBehaviour
     public float AttackRadius = 20f;
     private int index = -1;
 
+    public GameObject player;
+    public GameObject gun;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +48,13 @@ public class FSM : MonoBehaviour
 
     void Update()
     {
-        switch(currentState)
+
+
+      
+
+
+
+        switch (currentState)
         {
             case FSMStates.Patrol:
                 UpdatePatrol();
@@ -66,6 +75,7 @@ public class FSM : MonoBehaviour
             case FSMStates.Evade:
                 UpdateEvade();
                 break;
+
         }
     }
 
@@ -81,7 +91,8 @@ public class FSM : MonoBehaviour
         else if (Vector3.Distance(transform.position, playerTransform.position) <= chaseRadius) 
         {
             print("Switch to Chase state");
-            currentState = FSMStates.Chase;
+            //currentState = FSMStates.Chase;
+            currentState = FSMStates.Aim;
         }
 
         //Rotate to the target point
@@ -94,17 +105,37 @@ public class FSM : MonoBehaviour
 
     void UpdateChase()
     {
+        
 
     }
 
     void UpdateAim()
     {
+        if (Vector3.Distance(transform.position, playerTransform.position) <= chaseRadius)
+        {
+
+            Quaternion targetRotationg = Quaternion.LookRotation(player.transform.position - gun.transform.position);
+            gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, targetRotationg, Time.deltaTime * rotSpeed);
+
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= shootRate)
+            {
+
+                currentState = FSMStates.Shoot;
+            }
+
+
+        }
+
+        else currentState = FSMStates.Patrol;
 
     }
 
     void UpdateShoot()
     {
-
+        Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+        elapsedTime = 0.0f;
+        currentState = FSMStates.Patrol;
     }
 
     void UpdateEvade()

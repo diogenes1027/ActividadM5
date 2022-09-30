@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571336, b: 0.3069219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -220,10 +220,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92511275}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &184736718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2271679292463979608, guid: cc3e679ee4d30b34faee6dfa905e342e, type: 3}
+  m_PrefabInstance: {fileID: 2271679292085749563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &241088202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2271679292463979614, guid: cc3e679ee4d30b34faee6dfa905e342e, type: 3}
   m_PrefabInstance: {fileID: 2271679292085749563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &884555420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6147731165908858676, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+  m_PrefabInstance: {fileID: 1441818737}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1323998886
 GameObject:
@@ -478,6 +488,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9961947
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.08715578
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
 --- !u!1 &1441818738 stripped
@@ -520,6 +542,8 @@ MonoBehaviour:
   patrolRadius: 1
   chaseRadius: 10
   AttackRadius: 7
+  player: {fileID: 184736718}
+  gun: {fileID: 884555420}
 --- !u!1 &1670179327
 GameObject:
   m_ObjectHideFlags: 0
