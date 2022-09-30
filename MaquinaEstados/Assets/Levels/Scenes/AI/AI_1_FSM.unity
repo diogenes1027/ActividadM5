@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &17923247 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+  m_PrefabInstance: {fileID: 1441818737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &92511275
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +462,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253302875}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &319753207 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+  m_PrefabInstance: {fileID: 1609423549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &637405839
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +655,7 @@ MonoBehaviour:
   currentState: 0
   bullet: {fileID: 5512321803092707746, guid: 07f2c6ed9fd64114ea5495ec5e93efaa, type: 3}
   playerTransform: {fileID: 241088202}
+  gun: {fileID: 964781646}
   bulletSpawnPoint: {fileID: 718602766}
   pointList:
   - {fileID: 1703705755}
@@ -660,8 +671,6 @@ MonoBehaviour:
   patrolRadius: 1
   chaseRadius: 9
   AttackRadius: 6
-  aimTime: 1
-  elapsedAimTime: 0
   tookDamage: 0
   elapsedEvadeTime: 0
   evadeTime: 3
@@ -672,6 +681,16 @@ MonoBehaviour:
     m_Bits: 1
   Player: {fileID: 241088202}
   velocity: 2
+--- !u!4 &814117359 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+  m_PrefabInstance: {fileID: 2063111197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &964781646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+  m_PrefabInstance: {fileID: 718602764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &991295976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1233,7 @@ MonoBehaviour:
   currentState: 0
   bullet: {fileID: 5512321803092707746, guid: 07f2c6ed9fd64114ea5495ec5e93efaa, type: 3}
   playerTransform: {fileID: 241088202}
+  gun: {fileID: 17923247}
   bulletSpawnPoint: {fileID: 1441818739}
   pointList:
   - {fileID: 1703705755}
@@ -1229,8 +1249,6 @@ MonoBehaviour:
   patrolRadius: 1
   chaseRadius: 9
   AttackRadius: 6
-  aimTime: 1
-  elapsedAimTime: 0
   tookDamage: 0
   elapsedEvadeTime: 0
   evadeTime: 3
@@ -1497,6 +1515,7 @@ MonoBehaviour:
   currentState: 0
   bullet: {fileID: 5512321803092707746, guid: 07f2c6ed9fd64114ea5495ec5e93efaa, type: 3}
   playerTransform: {fileID: 241088202}
+  gun: {fileID: 319753207}
   bulletSpawnPoint: {fileID: 1609423551}
   pointList:
   - {fileID: 1703705755}
@@ -1512,8 +1531,6 @@ MonoBehaviour:
   patrolRadius: 1
   chaseRadius: 9
   AttackRadius: 6
-  aimTime: 1
-  elapsedAimTime: 0
   tookDamage: 0
   elapsedEvadeTime: 0
   evadeTime: 3
@@ -2080,6 +2097,7 @@ MonoBehaviour:
   currentState: 0
   bullet: {fileID: 5512321803092707746, guid: 07f2c6ed9fd64114ea5495ec5e93efaa, type: 3}
   playerTransform: {fileID: 241088202}
+  gun: {fileID: 814117359}
   bulletSpawnPoint: {fileID: 2063111199}
   pointList:
   - {fileID: 1703705755}
@@ -2095,8 +2113,6 @@ MonoBehaviour:
   patrolRadius: 1
   chaseRadius: 9
   AttackRadius: 6
-  aimTime: 1
-  elapsedAimTime: 0
   tookDamage: 0
   elapsedEvadeTime: 0
   evadeTime: 3
