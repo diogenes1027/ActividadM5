@@ -16,6 +16,8 @@ public class FSM : MonoBehaviour
 
     public GameObject bullet;
     public Transform playerTransform;
+    public Transform gun;
+
     public GameObject bulletSpawnPoint;
     public List<GameObject> pointList;
     public float curSpeed;
@@ -158,12 +160,31 @@ public class FSM : MonoBehaviour
 
     void UpdateAim()
     {
+        if (Vector3.Distance(transform.position, playerTransform.position) <= chaseRadius)
+        {
+
+            Quaternion targetRotationg = Quaternion.LookRotation(playerTransform.position - gun.position);
+            gun.rotation = Quaternion.Slerp(gun.rotation, targetRotationg, Time.deltaTime * rotSpeed);
+
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= shootRate)
+            {
+
+                currentState = FSMStates.Shoot;
+            }
+
+
+        }
+
+        else currentState = FSMStates.Patrol;
 
     }
 
     void UpdateShoot()
     {
-
+        Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+        elapsedTime = 0.0f;
+        currentState = FSMStates.Patrol;
     }
 
     void UpdateEvade()
