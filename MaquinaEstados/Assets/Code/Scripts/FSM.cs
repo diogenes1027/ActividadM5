@@ -29,8 +29,8 @@ public class FSM : MonoBehaviour
     public float chaseRadius = 25f;
     public float AttackRadius = 20f;
     private int index = -1;
-    public float aimTime = 1.0f;
-    public float elapsedAimTime;
+    //public float aimTime = 1.0f;
+    //public float elapsedAimTime;
     public bool tookDamage = false;
     public float elapsedEvadeTime;
     public float evadeTime = 3.0f;
@@ -168,7 +168,18 @@ public class FSM : MonoBehaviour
 
     void UpdateEvade()
     {
-
+        if(elapsedEvadeTime >= evadeTime)
+        {
+            print("Switch to Chase state");
+            currentState = FSMStates.Chase;
+        }
+        else
+        {
+            elapsedEvadeTime += Time.deltaTime;
+            Quaternion targetRotation = Quaternion.LookRotation(transform.position - escapePoint);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
+        }
     }
 
     void OnCollisionEnter(Collision col)
