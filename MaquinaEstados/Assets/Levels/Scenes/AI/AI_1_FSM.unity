@@ -310,8 +310,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -676,11 +676,6 @@ MonoBehaviour:
   evadeTime: 3
   escapePoint: {x: 0, y: 0, z: 0}
   AlertRange: 2.5
-  PlayerCape:
-    serializedVersion: 2
-    m_Bits: 1
-  Player: {fileID: 241088202}
-  velocity: 2
 --- !u!4 &814117359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6780996349919243662, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
@@ -1254,11 +1249,6 @@ MonoBehaviour:
   evadeTime: 3
   escapePoint: {x: 0, y: 0, z: 0}
   AlertRange: 2.5
-  PlayerCape:
-    serializedVersion: 2
-    m_Bits: 1
-  Player: {fileID: 241088202}
-  velocity: 2
 --- !u!1 &1478287126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,8 +1334,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1536,11 +1526,6 @@ MonoBehaviour:
   evadeTime: 3
   escapePoint: {x: 0, y: 0, z: 0}
   AlertRange: 2.5
-  PlayerCape:
-    serializedVersion: 2
-    m_Bits: 1
-  Player: {fileID: 241088202}
-  velocity: 2
 --- !u!1 &1670179327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,11 +2103,6 @@ MonoBehaviour:
   evadeTime: 3
   escapePoint: {x: 0, y: 0, z: 0}
   AlertRange: 2.5
-  PlayerCape:
-    serializedVersion: 2
-    m_Bits: 1
-  Player: {fileID: 241088202}
-  velocity: 2
 --- !u!1 &2069063583
 GameObject:
   m_ObjectHideFlags: 0

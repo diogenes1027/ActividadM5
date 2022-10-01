@@ -20,6 +20,7 @@ public class FSM : MonoBehaviour
 
     public GameObject bulletSpawnPoint;
     public List<GameObject> pointList;
+
     public float curSpeed;
     public float rotSpeed = 150.0f;
     public float turretRotSpeed = 10.0f;
@@ -31,18 +32,12 @@ public class FSM : MonoBehaviour
     public float chaseRadius = 25f;
     public float AttackRadius = 20f;
     private int index = -1;
-    //public float aimTime = 1.0f;
-    //public float elapsedAimTime;
     public bool tookDamage = false;
     public float elapsedEvadeTime;
     public float evadeTime = 3.0f;
     public Vector3 escapePoint;
     //Nuevos
     public float AlertRange;
-    public LayerMask PlayerCape;
-    public Transform Player;
-    public float velocity;
-    bool StayAlert;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +54,7 @@ public class FSM : MonoBehaviour
 
     void Update()
     {
+        //Si la vida del tanque y de los enemigos llega a 0, destruirlos.
         if(health <= 0) {
             Destroy(gameObject);
         }
@@ -86,6 +82,7 @@ public class FSM : MonoBehaviour
         }
     }
 
+    //Punto 1 de la actividad.
     void UpdatePatrol()
     {
         //Find another random patrol point if the current point is reached
@@ -109,7 +106,7 @@ public class FSM : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
     }
 
-    // Puntos 2 y 6 de la actividad de tanques
+    // Puntos 2 y 6 de la actividad.
     void UpdateChase()
     {
         float distance = Vector3.Distance(transform.position, playerTransform.position);
@@ -143,43 +140,31 @@ public class FSM : MonoBehaviour
             print("Switch to Evade state");
             currentState = FSMStates.Evade;
         }
-        /*
-        StayAlert = Physics.CheckSphere(transform.position, AlertRange, PlayerCape);
-
-        if(StayAlert == true) {
-            Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
-            transform.LookAt(posPlayer);
-            transform.position = Vector3.MoveTowards(transform.position, posPlayer, velocity * Time.deltaTime);
-        }
-        */
     }
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position,AlertRange);
     }
 
+    //Punto 3 de la actividad.
     void UpdateAim()
     {
         if (Vector3.Distance(transform.position, playerTransform.position) <= chaseRadius)
         {
-
             Quaternion targetRotationg = Quaternion.LookRotation(playerTransform.position - gun.position);
             gun.rotation = Quaternion.Slerp(gun.rotation, targetRotationg, Time.deltaTime * rotSpeed);
 
             elapsedTime += Time.deltaTime;
             if (elapsedTime >= shootRate)
             {
-
                 currentState = FSMStates.Shoot;
             }
-
-
         }
-
         else currentState = FSMStates.Patrol;
 
     }
 
+    //Punto 4 de la actividad.
     void UpdateShoot()
     {
         Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
@@ -187,6 +172,7 @@ public class FSM : MonoBehaviour
         currentState = FSMStates.Patrol;
     }
 
+    //Punto 5 de la actividad.
     void UpdateEvade()
     {
         if(elapsedEvadeTime >= evadeTime)
