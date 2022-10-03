@@ -125,17 +125,17 @@ public class FSM : MonoBehaviour
         }
         if(tookDamage) {
             tookDamage = false;
-            int xSign = (int)Mathf.Sign(playerTransform.position.x - transform.position.x);
-            int zSign = (int)Mathf.Sign(playerTransform.position.z - transform.position.z);
-            print("xSign is: " + xSign);
-            print("zSign is: " + zSign);
-            if(xSign == -1 && zSign == 1)
+            int SignX = (int)Mathf.Sign(playerTransform.position.x - transform.position.x);
+            int SignZ = (int)Mathf.Sign(playerTransform.position.z - transform.position.z);
+            print("SignX is: " + SignX);
+            print("SignZ is: " + SignX);
+            if(SignX == -1 && SignZ == 1)
                 escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
-            else if(xSign == 1 && zSign == 1)
+            else if(SignX == 1 && SignZ == 1)
                 escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
-            else if(xSign == -1 && zSign == -1)
+            else if(SignX == -1 && SignZ == -1)
                 escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z - Random.Range(5,10));
-            else if(xSign == 1 && zSign == -1)
+            else if(SignX == 1 && SignZ == -1)
                 escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z - Random.Range(5,10));
             print("Switch to Evade state");
             currentState = FSMStates.Evade;
